@@ -6,12 +6,15 @@ Wants=network-online.target
 [Service]
 Type=oneshot
 
-# Uses rclone sync to mirror local changes (including deletions)
-# --max-delete 50: Prevents mass deletions in case of system loss
+# Uses rclone sync to keep remote mirrored with local, keeping folders clean
 # --update: Only syncs if the local file is newer than the remote file
+# --size-only: Matches files based on size, preventing timestamp issues with Proton Drive
+# --max-delete 50: Safety threshold to prevent mass deletion during OS reinstall/format
+# Removed --ignore-errors so real syncing errors are properly logged in journalctl
 ExecStart=/usr/bin/rclone sync %h/ proton: \
     --filter-from %h/.config/rclone/proton.filter \
     --update \
+    --size-only \
     --max-delete 50 \
     --transfers 1 \
     --checkers 4 \
@@ -24,11 +27,10 @@ ExecStart=/usr/bin/rclone sync %h/ proton: \
     --retries-sleep 10s \
     --low-level-retries 10 \
     --buffer-size 16M \
-    --ignore-errors \
     --log-level NOTICE
 
-Restart=on-failure
-RestartSec=30
+# Removed Restart directives to prevent unnecessary retry loops during permanent failures
+# Let the .path watcher handle the next trigger when local files change
 StandardOutput=journal
 StandardError=journal
 
