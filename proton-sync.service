@@ -1,14 +1,18 @@
 [Unit]
-Description=Proton Drive One-Way Sync (Local → Proton)
+Description=Proton Drive Smart Sync (Local -> Proton)
 After=network-online.target
 Wants=network-online.target
 
 [Service]
 Type=oneshot
 
-ExecStart=/usr/bin/rclone copy %h/ proton: \
+# Uses rclone sync to mirror local changes (including deletions)
+# --max-delete 50: Prevents mass deletions in case of format/system loss
+# --update: Only syncs if the local file is newer than the remote file
+ExecStart=/usr/bin/rclone sync %h/ proton: \
     --filter-from %h/.config/rclone/proton.filter \
     --update \
+    --max-delete 50 \
     --transfers 1 \
     --checkers 4 \
     --tpslimit 1 \
