@@ -7,7 +7,7 @@ Wants=network-online.target
 Type=oneshot
 
 # Uses rclone sync to mirror local changes (including deletions)
-# --max-delete 50: Prevents mass deletions in case of format/system loss
+# --max-delete 50: Prevents mass deletions in case of system loss
 # --update: Only syncs if the local file is newer than the remote file
 ExecStart=/usr/bin/rclone sync %h/ proton: \
     --filter-from %h/.config/rclone/proton.filter \
