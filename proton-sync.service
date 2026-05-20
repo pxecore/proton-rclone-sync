@@ -8,8 +8,9 @@ Type=oneshot
 
 ExecStart=/usr/bin/rclone copy %h/ proton: \
     --filter-from %h/.config/rclone/proton.filter \
+    --update \
     --transfers 1 \
-    --checkers 1 \
+    --checkers 4 \
     --tpslimit 1 \
     --tpslimit-burst 1 \
     --drive-pacer-min-sleep 1s \
