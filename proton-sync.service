@@ -6,7 +6,6 @@ Wants=network-online.target
 [Service]
 Type=oneshot
 
-
 ExecStart=/usr/bin/rclone sync %h/ proton: \
     --filter-from %h/.config/rclone/proton.filter \
     --update \
@@ -24,7 +23,6 @@ ExecStart=/usr/bin/rclone sync %h/ proton: \
     --low-level-retries 10 \
     --buffer-size 16M \
     --log-level NOTICE
-
 
 StandardOutput=journal
 StandardError=journal
