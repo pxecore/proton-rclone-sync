@@ -6,11 +6,7 @@ Wants=network-online.target
 [Service]
 Type=oneshot
 
-# Uses rclone sync to keep remote mirrored with local, keeping folders clean
-# --update: Only syncs if the local file is newer than the remote file
-# --size-only: Matches files based on size, preventing timestamp issues with Proton Drive
-# --max-delete 50: Safety threshold to prevent mass deletion during OS reinstall/format
-# Removed --ignore-errors so real syncing errors are properly logged in journalctl
+
 ExecStart=/usr/bin/rclone sync %h/ proton: \
     --filter-from %h/.config/rclone/proton.filter \
     --update \
