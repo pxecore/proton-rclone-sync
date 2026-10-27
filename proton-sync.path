@@ -5,7 +5,6 @@ Description=Proton Drive Path Watcher
 PathChanged=%h/Documents
 PathChanged=%h/Pictures
 PathChanged=%h/Videos
-TriggerLimitIntervalSec=60
 
 [Install]
 WantedBy=default.target
