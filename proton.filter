@@ -1,4 +1,9 @@
 # Example Filter Rules
+- **/.git/**
+- **/node_modules/**
+- **/.env
+- **/.env.*
+- **/.cache/**
 + /Documents/**
 + /Pictures/**
 + /Videos/**
