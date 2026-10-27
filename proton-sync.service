@@ -1,7 +1,5 @@
 [Unit]
 Description=Proton Drive Smart Sync (Local -> Proton)
-After=network-online.target
-Wants=network-online.target
 
 [Service]
 Type=oneshot
@@ -15,8 +13,6 @@ ExecStart=/usr/bin/rclone sync %h/ proton: \
     --checkers 4 \
     --tpslimit 1 \
     --tpslimit-burst 1 \
-    --drive-pacer-min-sleep 1s \
-    --drive-pacer-burst 1 \
     --protondrive-replace-existing-draft=true \
     --retries 5 \
     --retries-sleep 10s \
@@ -26,6 +22,3 @@ ExecStart=/usr/bin/rclone sync %h/ proton: \
 
 StandardOutput=journal
 StandardError=journal
-
-[Install]
-WantedBy=default.target
