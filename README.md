@@ -24,7 +24,7 @@ The service calls `/usr/bin/rclone`. If `which rclone` prints something else, ed
 1. Clone the repo:
 
    ```bash
-   git clone https://github.com/l0wa1r/proton-rclone-sync ~/.local/share/proton-sync
+   git clone https://github.com/pxecore/proton-rclone-sync ~/.local/share/proton-sync
    cd ~/.local/share/proton-sync
    ```
 
